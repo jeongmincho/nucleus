@@ -1,1 +1,1 @@
-# Fitness Tracker Project - Week 1
+# Nucleus Fitness Tracker
