@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script defer type="module" src="script.js"></script>
+    <script defer type="module" src="exercises.js"></script>
+    <title>NUCLEUS</title>
+  </head>
+
+  <body>
+    <!-- navbar -->
+    <section id="navbar">
+      <img id="logo" src="static/logo.svg" />
+      <section id="navbar-options">
+        <div class="navbar-option" id="navbar-option-about">ABOUT</div>
+        <div class="navbar-option" id="navbar-option-home">HOME</div>
+        <div class="navbar-option" id="navbar-option-blog">BLOG</div>
+        <div class="navbar-option" id="navbar-option-why">WHY NUCLEUS?</div>
+        <div class="navbar-option" id="navbar-option-contact">CONTACT</div>
+      </section>
+    </section>
+    <!-- content container -->
+    <section id="content">
+      <!-- routines container -->
+      <section id="routines-container">
+        <div id="routines-header">ROUTINES</div>
+        <div class="routine-option" id="monday">
+          <div class="routine-option-checkbox"></div>
+          MONDAY
+          <div class="routine-option-tag"></div>
+        </div>
+        <div class="routine-option" id="tuesday">
+          <div class="routine-option-checkbox"></div>
+          TUESDAY
+          <div class="routine-option-tag"></div>
+        </div>
+        <div class="routine-option" id="wednesday">
+          <div class="routine-option-checkbox"></div>
+          WEDNESDAY
+          <div class="routine-option-tag"></div>
+        </div>
+        <div class="routine-option" id="thursday">
+          <div class="routine-option-checkbox"></div>
+          THURSDAY
+          <div class="routine-option-tag"></div>
+        </div>
+        <div class="routine-option" id="friday">
+          <div class="routine-option-checkbox"></div>
+          FRIDAY
+          <div class="routine-option-tag"></div>
+        </div>
+        <div class="routine-option" id="saturday">
+          <div class="routine-option-checkbox"></div>
+          SATURDAY
+          <div class="routine-option-tag"></div>
+        </div>
+        <div class="routine-option" id="sunday">
+          <div class="routine-option-checkbox"></div>
+          SUNDAY
+          <div class="routine-option-tag"></div>
+        </div>
+      </section>
+
+      <!-- routine container -->
+      <section id="routine-container">
+        <div id="routine-header">
+          WELCOME TO NUCLEUS, YOUR PERSONAL FITNESS ROUTINE TRACKER!
+        </div>
+        <div id="routine-content-welcome">
+          We're so glad to have you here today :)
+        </div>
+        <div id="routine-content"></div>
+        <div id="routine-decoration"></div>
+      </section>
+    </section>
+
+    <!-- add button container -->
+    <div id="addExerciseButtonContainer">
+      <button id="addExerciseButton">
+        <img id="addExerciseButtonImage" src="static/button.svg" />
+      </button>
+    </div>
+
+    <!-- new-exercise modal -->
+
+    <div id="new-exercise-backdrop"></div>
+    <div id="new-exercise-flexContainer">
+      <div id="new-exercise-container">
+        <div id="new-exercise-header">
+          <h3>ADD A NEW EXERCISE!</h3>
+          <span class="close">X</span>
+        </div>
+        <div id="new-exercise-content">
+          <div id="new-exercise-content-left">
+            <div id="new-exercise-name">
+              <span>Exercise Name:</span><br />
+              <input type="text" id="new-exercise-nameInput" required />
+              <br />
+            </div>
+            <div id="new-exercise-duration">
+              <span>Exercise Duration (mins):</span><br /><input
+                type="number"
+                id="new-exercise-time"
+                min="1"
+                max="60"
+              /><br />
+            </div>
+          </div>
+          <div id="new-exercise-content-center">
+            <div id="new-exercise-reps">
+              <span>Number of Reps:</span><br /><input
+                type="number"
+                id="new-exercise-repsInput"
+                placeholder="1"
+                min="1"
+                max="200"
+              /><br />
+            </div>
+            <div id="new-exercise-sets">
+              <span>Number of Sets:</span><br /><input
+                type="number"
+                id="new-exercise-setsInput"
+                placeholder="1"
+                min="1"
+                max="20"
+              /><br />
+            </div>
+          </div>
+          <div id="new-exercise-content-right">
+            <div id="new-exercise-parts">
+              <span>Exercise Target Parts:</span><br /><input
+                type="text"
+                id="new-exercise-partsInput"
+                placeholder="Optional"
+              /><br />
+            </div>
+            <div id="new-exercise-days">
+              <span>Select Exercise Day</span>
+              <div id="new-exercise-dayButtons">
+                <button id="monday">M</button>
+                <button id="tuesday">T</button>
+                <button id="wednesday">W</button>
+                <button id="thursday">Th</button>
+                <button id="friday">F</button>
+                <button id="saturday">Sat</button>
+                <button id="sunday">Sun</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="new-exercise-footer">
+          <input type="submit" value="SAVE" id="new-exercise-save" />
+          <div id="new-exercise-errormsg"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

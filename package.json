@@ -1,0 +1,17 @@
+{
+  "name": "fitness-tracker-week-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server public",
+    "deploy": "git subtree push --prefix public origin gh-pages"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "live-server": "^1.2.1",
+    "micromodal": "^0.4.0"
+  }
+}
