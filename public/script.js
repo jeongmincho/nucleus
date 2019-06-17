@@ -160,8 +160,8 @@ function renderBlog() {
   routinesContainer.classList.add("inactive");
   routineContainer.classList.add("other");
   routineHeader.innerText =
-    "DO YOU THINK I HAD THE TIME TO BLOG WHILE MAKING THIS?";
-  welcome.innerText = "No way, Jose!";
+    "DO YOU THINK I HAD THE LEISURE TO BLOG WHILE MAKING THIS?";
+  welcome.innerText = "No way, Jose. I wish I did though!";
 }
 
 function renderWhy() {
@@ -185,7 +185,7 @@ function renderContact() {
   routineContainer.classList.add("other");
   routineHeader.innerText = "IF YOU WOULD LIKE TO REACH ME, JUST SLACK ME!";
   welcome.innerText =
-    "I'm happy to run you through my code! It's probably full of bugballs though...";
+    "Please let me know if you come across any bugs (there will be plenty...) Thank you!";
 }
 
 //  ADD BUTTON FOOTER VISIBILITY TRANSITIONS
