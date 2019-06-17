@@ -280,7 +280,8 @@ function createExerciseComponent(exercise) {
       checkCountArray.every(elem => {
         // console.log(elem.count === elem.sets);
         return elem.count == elem.sets;
-      })
+      }) &&
+      checkCountArray.length !== 0
     ) {
       if (congratulationsMessageCount !== 1) renderCongratulations();
     }
@@ -314,12 +315,13 @@ function createExerciseComponent(exercise) {
     exerciseContainer.style.background = `linear-gradient(to right, ${color},0.5) ${percentage}%, white ${percentage}%)`;
     exerciseSets.innerText = `${exercise.count}/${exercise.sets}`;
     // console.log(renderArray);
-    console.dir(checkCountArray);
+    // console.dir(checkCountArray);
     if (
       checkCountArray.every(elem => {
         // console.log(elem.count === elem.sets);
         return elem.count == elem.sets;
-      })
+      }) &&
+      checkCountArray.length !== 0
     ) {
       if (congratulationsMessageCount !== 1) renderCongratulations();
     }
