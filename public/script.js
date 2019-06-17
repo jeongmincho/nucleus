@@ -7,6 +7,7 @@ const routineHeader = document.getElementById("routine-header");
 const routineContent = document.getElementById("routine-content");
 const welcome = document.getElementById("routine-content-welcome");
 const logo = document.getElementById("logo");
+let currentEditExercise = "";
 
 // NAVBAR BUTTONS
 
@@ -141,13 +142,15 @@ function renderContact() {
 
 //  ADD BUTTON FOOTER VISIBILITY TRANSITIONS
 
-var footer = document.getElementById("new-exercise-container");
-var footerShadow = document.getElementById("new-exercise-backdrop");
-var btn = document.getElementById("addExerciseButton");
-var span = document.getElementsByClassName("close")[0];
-var newExerciseSaveBtn = document.getElementById("new-exercise-save");
+const footer = document.getElementById("new-exercise-container");
+const footerShadow = document.getElementById("new-exercise-backdrop");
+const btn = document.getElementById("addExerciseButton");
+const span = document.getElementsByClassName("close")[0];
+const newExerciseSaveBtn = document.getElementById("new-exercise-save");
+const newExerciseSaveEditBtn = document.getElementById("new-exercise-saveEdit");
 
 btn.onclick = function() {
+  resetForm();
   footer.classList.add("active");
   footerShadow.classList.add("active");
 };
@@ -207,14 +210,46 @@ function createExerciseComponent(exercise) {
   exerciseDuration.classList.add("exercise-duration");
   exerciseDuration.innerText = `Estimated Time: ${exercise.time} minutes`;
   exerciseContentRightContainer.appendChild(exerciseDuration);
+  //create and append <div class="exercise-content-button-container">
+  const exerciseContentButtonContainer = document.createElement("div");
+  exerciseContentButtonContainer.classList.add(
+    "exercise-content-button-container"
+  );
+  exerciseContentRight.appendChild(exerciseContentButtonContainer);
+  //create and append <button class="exercise-edit-button">
+  const editButton = document.createElement("button");
+  editButton.classList.add("exercise-edit-button");
+  editButton.addEventListener("click", function(event) {
+    editExercise(exercise);
+  });
+  exerciseContentButtonContainer.appendChild(editButton);
   //create and append <button class="exercise-delete-button">
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("exercise-delete-button");
   deleteButton.addEventListener("click", function(event) {
     deleteExercise(exercise);
   });
-  exerciseContentRight.appendChild(deleteButton);
+  exerciseContentButtonContainer.appendChild(deleteButton);
   return exerciseContainer;
+}
+
+function editExercise(exercise) {
+  document.querySelector("#new-exercise-header h3").innerText = "EDIT EXERCISE";
+  document.getElementById("new-exercise-nameInput").value = exercise.name;
+  document.getElementById("new-exercise-time").value = exercise.time;
+  document.getElementById("new-exercise-repsInput").value = exercise.reps;
+  document.getElementById("new-exercise-setsInput").value = exercise.sets;
+  document.getElementById("new-exercise-partsInput").value = exercise.parts;
+  document.getElementById("new-exercise-errormsg").innerText = "";
+  newDay = exercise.day;
+  buttonObjList.forEach(elem => {
+    if (elem.id === exercise.day) elem.classList.add("active");
+  });
+  document.getElementById("new-exercise-saveEdit").classList.remove("inactive");
+  document.getElementById("new-exercise-save").classList.add("inactive");
+  footer.classList.add("active");
+  footerShadow.classList.add("active");
+  currentEditExercise = exercise;
 }
 
 function deleteExercise(exercise) {
@@ -234,16 +269,7 @@ routinesContainer.addEventListener("click", function(event) {
     const dayOfWeek = event.target.id; //monday
     const routinesList = document.querySelectorAll(".routine-option"); //get all option objects of routines
     const routine = document.querySelector(`#${dayOfWeek}`); //get the routine with the monday ID
-    routineContainer.classList.toggle(dayOfWeek); //container toggle the day
-    [...routineContainer.classList].forEach(elem => {
-      // console.log("running through routineContainer's classlist");
-      if (elem !== dayOfWeek) {
-        // console.log(
-        //   "running through routineContainer's classlist and removing classes of days not selected"
-        // );
-        routineContainer.classList.remove(elem);
-      }
-    });
+    renderRoutineBorderLeft(dayOfWeek);
     //style routine with active class
     routinesList.forEach(elem => {
       // console.log("style routine with active class");
@@ -268,6 +294,15 @@ routinesContainer.addEventListener("click", function(event) {
     }
   }
 });
+
+function renderRoutineBorderLeft(day) {
+  routineContainer.classList.toggle(day);
+  [...routineContainer.classList].forEach(elem => {
+    if (elem !== day) {
+      routineContainer.classList.remove(elem);
+    }
+  });
+}
 
 function clearRoutineOption() {
   const routinesList = document.querySelectorAll(".routine-option");
@@ -371,6 +406,49 @@ buttonList.addEventListener("click", function(event) {
   });
 });
 
+newExerciseSaveEditBtn.addEventListener("click", function() {
+  console.dir(currentEditExercise);
+  const errorMsg = document.getElementById("new-exercise-errormsg");
+  const name = document
+    .getElementById("new-exercise-nameInput")
+    .value.toUpperCase();
+  const time = document.getElementById("new-exercise-time").value;
+  const day = newDay;
+  const reps = document.getElementById("new-exercise-repsInput").value;
+  const sets = document.getElementById("new-exercise-setsInput").value;
+  const target = document
+    .getElementById("new-exercise-partsInput")
+    .value.toUpperCase();
+  if (name === "") {
+    errorMsg.innerText = "You must specify the name of your exercise!";
+  } else if (time === "") {
+    errorMsg.innerText = "You must specify the duration of your exercise!";
+  } else if (reps === "")
+    errorMsg.innerText =
+      "You must specify the number of repetitions in your exercise!";
+  else if (sets === "")
+    errorMsg.innerText =
+      "You must specify the number of sets in your exercise!";
+  else if (!newDay.includes("day"))
+    errorMsg.innerText = "You must specify the day of your exercise!";
+  else if (target === "")
+    errorMsg.innerText = "You must specify the target parts of your  exercise!";
+  else {
+    currentEditExercise.name = name;
+    currentEditExercise.time = time;
+    currentEditExercise.reps = reps;
+    currentEditExercise.sets = sets;
+    currentEditExercise.parts = target;
+    currentEditExercise.day = day;
+    clearRoutine();
+    renderRoutine(day);
+    resetForm();
+    renderRoutineOption(day);
+    renderRoutineBorderLeft(day);
+    footer.classList.remove("active");
+    footerShadow.classList.remove("active");
+  }
+});
 newExerciseSaveBtn.addEventListener("click", function() {
   const errorMsg = document.getElementById("new-exercise-errormsg");
   const name = document
@@ -406,12 +484,15 @@ newExerciseSaveBtn.addEventListener("click", function() {
     renderRoutine(day);
     resetForm();
     renderRoutineOption(day);
+    renderRoutineBorderLeft(day);
     footer.classList.remove("active");
     footerShadow.classList.remove("active");
   }
 });
 
 function resetForm() {
+  document.querySelector("#new-exercise-header h3").innerText =
+    "ADD A NEW EXERCISE!";
   document.getElementById("new-exercise-nameInput").value = "";
   document.getElementById("new-exercise-time").value = "";
   document.getElementById("new-exercise-repsInput").value = "";
@@ -421,4 +502,6 @@ function resetForm() {
   buttonObjList.forEach(elem => {
     elem.classList.remove("active");
   });
+  document.getElementById("new-exercise-saveEdit").classList.add("inactive");
+  document.getElementById("new-exercise-save").classList.remove("inactive");
 }
