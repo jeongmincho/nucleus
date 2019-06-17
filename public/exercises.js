@@ -18,7 +18,7 @@ const barbellRows = new Exercise(
   "BARBELL ROWS",
   25,
   10,
-  3,
+  4,
   "LATS, DELTOID"
 );
 const deadlifts = new Exercise(
@@ -30,66 +30,66 @@ const deadlifts = new Exercise(
   "GLUTES, QUADS, LOWER BACK"
 );
 
-const pushups = new Exercise("tuesday", "PUSHUPS", 20, 10, 7, "CHEST");
-const benchPress = new Exercise("tuesday", "BENCH PRESS", 25, 10, 3, "CHEST");
+const pushups = new Exercise("tuesday", "PUSHUPS", 20, 50, 5, "CHEST");
+const benchPress = new Exercise("tuesday", "BENCH PRESS", 30, 10, 5, "CHEST");
 const cableFlies = new Exercise(
   "tuesday",
   "CABLE FLIES",
-  30,
-  10,
-  5,
+  20,
+  20,
+  3,
   "UPPER CHEST"
 );
 const chestDip = new Exercise(
   "tuesday",
   "CHEST DIPS",
-  20,
-  20,
-  5,
+  25,
+  15,
+  8,
   "LOWER CHEST"
 );
 
-const squats = new Exercise("wednesday", "SQUATS", 25, 25, 5, "LEGS");
+const squats = new Exercise("wednesday", "SQUATS", 25, 10, 5, "LEGS");
 const dumbbellLunges = new Exercise(
   "wednesday",
   "DUMBBELL LUNGES",
-  25,
-  25,
-  5,
+  20,
+  10,
+  7,
   "LEGS"
 );
-const legPress = new Exercise("wednesday", "LEG PRESS", 25, 25, 5, "LEGS");
-const calfRaise = new Exercise("wednesday", "CALF RAISES", 25, 25, 5, "CALVES");
+const legPress = new Exercise("wednesday", "LEG PRESS", 25, 10, 3, "LEGS");
+const calfRaise = new Exercise("wednesday", "CALF RAISES", 20, 30, 4, "CALVES");
 
 const preacherCurls = new Exercise(
   "thursday",
   "PREACHER CURLS",
   25,
-  25,
+  15,
   5,
   "LOWER BICEPS"
 );
 const inclineDumbbellCurls = new Exercise(
   "thursday",
   "INCLINE DUMBBELL CURLS",
-  25,
-  25,
-  5,
+  20,
+  10,
+  7,
   "UPPER BICEPS"
 );
 const hammerCurls = new Exercise(
   "thursday",
   "HAMMER CURLS",
   25,
-  25,
-  5,
+  10,
+  4,
   "SIDE BICEPS"
 );
 const standingBarbellCurls = new Exercise(
   "thursday",
   "STANDING BARBELL CURLS",
-  25,
-  25,
+  30,
+  10,
   5,
   "BICEPS"
 );
@@ -106,15 +106,15 @@ const tricepExtensions = new Exercise(
   "friday",
   "TRICEP EXTENSIONS",
   25,
-  25,
-  5,
+  10,
+  4,
   "LOWER TRICEPS"
 );
 const skullcrushers = new Exercise(
   "friday",
   "SKULLCRUSHERS",
-  25,
-  25,
+  30,
+  10,
   5,
   "UPPER TRICEPS"
 );
@@ -122,17 +122,17 @@ const skullcrushers = new Exercise(
 const tricepKickbacks = new Exercise(
   "friday",
   "TRICEP KICKBACKS",
-  25,
-  25,
-  5,
+  20,
+  10,
+  7,
   "TRICEPS"
 );
 
 const dumbbellLateralRaise = new Exercise(
   "saturday",
   "DUMBBELL LATERAL RAISE",
-  25,
-  25,
+  30,
+  10,
   5,
   "OUTER SHOULDERS"
 );
@@ -140,16 +140,16 @@ const barbellFrontRaise = new Exercise(
   "saturday",
   "BARBELL FRONT RAISE",
   25,
-  25,
-  5,
+  10,
+  4,
   "FRONT SHOULDERS"
 );
 const seatedMilitaryPresses = new Exercise(
   "saturday",
   "SEATED MILITARY PRESS",
-  25,
-  25,
-  5,
+  20,
+  10,
+  7,
   "SHOULDERS"
 );
 const oneArmCableLateralRaise = new Exercise(
@@ -165,8 +165,8 @@ const latPullDownSun = new Exercise(
   "sunday",
   "LAT PULL DOWN",
   25,
-  15,
-  5,
+  10,
+  4,
   "LATS"
 );
 const pullupsSun = new Exercise(
@@ -180,17 +180,17 @@ const pullupsSun = new Exercise(
 const barbellRowsSun = new Exercise(
   "sunday",
   "BARBELL ROWS",
-  25,
+  30,
   10,
-  3,
+  5,
   "LATS, DELTOID"
 );
 const deadliftsSun = new Exercise(
   "sunday",
   "DEADLIFTS",
-  30,
+  25,
   10,
-  5,
+  3,
   "GLUTES, QUADS, LOWER BACK"
 );
 

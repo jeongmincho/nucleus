@@ -374,7 +374,7 @@ input[type="submit" i] {
   border: 1px solid lightgray;
   border-radius: 10px;
   margin: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
   width: 85%;
   padding: 1rem;
   -webkit-box-shadow: 5px 5px 57px -44px rgba(0, 0, 0, 0.63);
@@ -453,23 +453,28 @@ input[type="submit" i] {
   border-radius: 10px;
   margin: 1rem;
   width: 95%;
-  padding: 1rem;
+  padding: 0 1rem;
   flex: 1;
-  /* background: linear-gradient(to right, #ff0000 50%, transparent 50%); */
 }
 
 .exercise-header {
   font-size: 18px;
+  margin-bottom: .1rem;
 }
 
 .exercise-content-left {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  padding: 1rem 0;
 }
 
 .exercise-content-right {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 1rem 0;
 }
 
 .exercise-content-right-container {
@@ -760,4 +765,46 @@ input[type="submit" i] {
 
 #addExerciseButtonImage:hover, #addExerciseButtonImage:focus {
   opacity: 1
+}
+
+/* modal */
+
+#congratulationsModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.congratulationsModal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.newClose {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.newClose:hover, .newClose:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#giphy {
+  border-radius: 10px;
 }

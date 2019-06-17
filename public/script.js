@@ -9,6 +9,54 @@ const welcome = document.getElementById("routine-content-welcome");
 const logo = document.getElementById("logo");
 let currentEditExercise = "";
 
+// COLOR CODES
+
+// const mondayColor = "#40A4D8";
+// const tuesdayColor = "#33BEB8";
+// const wednesdayColor = "#FECC2F";
+// const thursdayColor = "#F6621F";
+// const fridayColor = "#DB3838";
+// const saturdayColor = "#EE657A";
+// const sundayColor = "#A363D9";
+
+const mondayColorRGB = {
+  day: "monday",
+  code: "rgb(64,164,216"
+};
+const tuesdayColorRGB = {
+  day: "tuesday",
+  code: "rgb(51,190,184"
+};
+const wednesdayColorRGB = {
+  day: "wednesday",
+  code: "rgb(254,204,47"
+};
+const thursdayColorRGB = {
+  day: "thursday",
+  code: "rgb(246,98,31"
+};
+const fridayColorRGB = {
+  day: "friday",
+  code: "rgb(219,56,56"
+};
+const saturdayColorRGB = {
+  day: "saturday",
+  code: "rgb(238,101,122"
+};
+const sundayColorRGB = {
+  day: "sunday",
+  code: "rgb(163,99,217"
+};
+const colorObjectArray = [
+  mondayColorRGB,
+  tuesdayColorRGB,
+  wednesdayColorRGB,
+  thursdayColorRGB,
+  fridayColorRGB,
+  saturdayColorRGB,
+  sundayColorRGB
+];
+
 // NAVBAR BUTTONS
 
 const about = document.getElementById("navbar-option-about");
@@ -162,12 +210,51 @@ span.onclick = function() {
 };
 
 window.onclick = function(event) {
-  if (event.target == footerShadow) {
+  if (event.target == footerShadow || event.target == modal) {
+    modal.style.display = "none";
     footer.classList.remove("active");
     footerShadow.classList.remove("active");
     resetForm();
   }
 };
+
+///
+
+// const exerciseContainer = document.getElementsByClassName(
+//   "exercise-container"
+// )[0];
+
+// const exerciseContentRight = document.getElementsByClassName(
+//   "exercise-content-right"
+// )[0];
+
+// const exerciseContentLeft = document.getElementsByClassName(
+//   "exercise-content-left"
+// )[0];
+
+// let counter = 0;
+
+// exerciseContentRight.addEventListener("click", function() {
+//   if (counter < counterMax) counter++;
+//   const percentage = Math.floor((counter / 5) * 100);
+//   console.log("this is working");
+//   exerciseContainer.style.background = `linear-gradient(to right, ${mondayColorRGB},0.5) ${percentage}%, white ${percentage}%)`;
+// });
+
+// exerciseContentLeft.addEventListener("click", function() {
+//   counter--;
+//   const percentage = Math.floor((counter / 5) * 100);
+//   console.log("this is working");
+//   exerciseContainer.style.background = `linear-gradient(to right, ${mondayColorRGB},0.5) ${percentage}%, white ${percentage}%)`;
+// });
+
+function selectColorCode(day) {
+  let colorCode = "";
+  colorObjectArray.forEach(obj => {
+    if (obj.day === day) colorCode = obj.code;
+  });
+  return colorCode;
+}
 
 // ROUTINE FUNCTIONALITY
 
@@ -176,9 +263,28 @@ function createExerciseComponent(exercise) {
   const exerciseContainer = document.createElement("div");
   exerciseContainer.classList.add("exercise-container");
   exerciseContainer.classList.add(exercise.day);
+  const color = selectColorCode(exercise.day);
+  const initialPercentage = Math.floor((exercise.count / exercise.sets) * 100);
+  exerciseContainer.style.background = `linear-gradient(to right, ${color},0.5) ${initialPercentage}%, white ${initialPercentage}%)`;
   //create and append <div id="exercise-content-left">
   const exerciseContentLeft = document.createElement("div");
   exerciseContentLeft.classList.add("exercise-content-left");
+  exerciseContentLeft.addEventListener("click", function() {
+    console.log("subtraction is working!");
+    if (exercise.count > 0) exercise.count--;
+    const percentage = Math.floor((exercise.count / exercise.sets) * 100);
+    console.log(percentage, exercise.count, exercise.sets);
+    exerciseContainer.style.background = `linear-gradient(to right, ${color},0.5) ${percentage}%, white ${percentage}%)`;
+    exerciseSets.innerText = `${exercise.count}/${exercise.sets}`;
+    if (
+      checkCountArray.every(elem => {
+        // console.log(elem.count === elem.sets);
+        return elem.count === elem.sets;
+      })
+    ) {
+      if (congratulationsMessageCount !== 1) renderCongratulations();
+    }
+  });
   exerciseContainer.appendChild(exerciseContentLeft);
   //create and append <div id="exercise-header">
   const exerciseHeader = document.createElement("div");
@@ -193,6 +299,30 @@ function createExerciseComponent(exercise) {
   //create and append <div id="exercise-content-right">
   const exerciseContentRight = document.createElement("div");
   exerciseContentRight.classList.add("exercise-content-right");
+  exerciseContentRight.addEventListener("click", function(event) {
+    console.dir(event.target.classList[0]);
+    if (event.target.classList[0] === "exercise-edit-button") {
+      return;
+    }
+    // console.log("addition is working!");
+    if (exercise.count < exercise.sets) {
+      // console.log("if statement is reached");
+      exercise.count++;
+    }
+    const percentage = Math.floor((exercise.count / exercise.sets) * 100);
+    // console.log(percentage, exercise.count, exercise.sets);
+    exerciseContainer.style.background = `linear-gradient(to right, ${color},0.5) ${percentage}%, white ${percentage}%)`;
+    exerciseSets.innerText = `${exercise.count}/${exercise.sets}`;
+    // console.log(renderArray);
+    if (
+      checkCountArray.every(elem => {
+        // console.log(elem.count === elem.sets);
+        return elem.count === elem.sets;
+      })
+    ) {
+      if (congratulationsMessageCount !== 1) renderCongratulations();
+    }
+  });
   exerciseContainer.appendChild(exerciseContentRight);
   //create and append <div class="exercise-content-right-container">
   const exerciseContentRightContainer = document.createElement("div");
@@ -356,6 +486,8 @@ function clearRoutine() {
   // console.dir(routineContent);
 }
 
+let checkCountArray = [];
+
 function renderRoutine(day) {
   console.log("render routine");
   const renderArray = [];
@@ -364,6 +496,7 @@ function renderRoutine(day) {
       renderArray.push(exercise);
     }
   });
+  checkCountArray = renderArray;
   renderArray.forEach(elem => {
     routineContent.appendChild(createExerciseComponent(elem));
   });
@@ -371,6 +504,13 @@ function renderRoutine(day) {
   // console.log(routineContainer);
   routineContainer.prepend(routineHeader);
   routineContainer.appendChild(routineContent);
+}
+
+let congratulationsMessageCount = 0;
+
+function renderCongratulations() {
+  congratulationsMessageCount++;
+  modal.style.display = "block";
 }
 
 class Exercise {
@@ -505,3 +645,14 @@ function resetForm() {
   document.getElementById("new-exercise-saveEdit").classList.add("inactive");
   document.getElementById("new-exercise-save").classList.remove("inactive");
 }
+
+// Get the modal
+const modal = document.getElementById("congratulationsModal");
+
+// Get the <span> element that closes the modal
+const newSpan = document.getElementsByClassName("newClose")[0];
+
+// When the user clicks on <span> (x), close the modal
+newSpan.onclick = function() {
+  modal.style.display = "none";
+};
