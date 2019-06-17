@@ -70,10 +70,10 @@ about.addEventListener("click", function() {
   if (currentPage == "about") {
     renderHome();
     currentPage = "home";
-    console.log("rendering home page", currentPage);
+    // console.log("rendering home page", currentPage);
   } else {
     currentPage = "about";
-    console.log("rendering about page", currentPage);
+    // console.log("rendering about page", currentPage);
     renderAbout();
   }
 });
@@ -82,10 +82,10 @@ blog.addEventListener("click", function() {
   if (currentPage == "blog") {
     renderHome();
     currentPage = "home";
-    console.log("rendering home page", currentPage);
+    // console.log("rendering home page", currentPage);
   } else {
     currentPage = "blog";
-    console.log("rendering blog page", currentPage);
+    // console.log("rendering blog page", currentPage);
     renderBlog();
   }
 });
@@ -94,10 +94,10 @@ why.addEventListener("click", function() {
   if (currentPage == "why") {
     renderHome();
     currentPage = "home";
-    console.log("rendering home page", currentPage);
+    // console.log("rendering home page", currentPage);
   } else {
     currentPage = "why";
-    console.log("rendering why page", currentPage);
+    // console.log("rendering why page", currentPage);
     renderWhy();
   }
 });
@@ -106,23 +106,23 @@ contact.addEventListener("click", function() {
   if (currentPage == "contact") {
     renderHome();
     currentPage = "home";
-    console.log("rendering home page", currentPage);
+    // console.log("rendering home page", currentPage);
   } else {
     currentPage = "contact";
-    console.log("rendering contact page", currentPage);
+    // console.log("rendering contact page", currentPage);
     renderContact();
   }
 });
 
 logo.addEventListener("click", function() {
   currentPage = "home";
-  console.log("rendering home page", currentPage);
+  // console.log("rendering home page", currentPage);
   renderHome();
 });
 
 home.addEventListener("click", function() {
   currentPage = "home";
-  console.log("rendering home page", currentPage);
+  // console.log("rendering home page", currentPage);
   renderHome();
 });
 
@@ -132,7 +132,7 @@ function renderHome() {
   const currentClass = routineContainer.classList.item(0);
   if (currentClass !== "other") routineContainer.classList.remove(currentClass);
   welcome.classList.remove("inactive");
-  previousDay = "";
+  // previousDay = "";
   routinesContainer.classList.remove("inactive");
   routineContainer.classList.remove("other");
   routineHeader.innerText =
@@ -270,16 +270,16 @@ function createExerciseComponent(exercise) {
   const exerciseContentLeft = document.createElement("div");
   exerciseContentLeft.classList.add("exercise-content-left");
   exerciseContentLeft.addEventListener("click", function() {
-    console.log("subtraction is working!");
+    // console.log("subtraction is working!");
     if (exercise.count > 0) exercise.count--;
     const percentage = Math.floor((exercise.count / exercise.sets) * 100);
-    console.log(percentage, exercise.count, exercise.sets);
+    // console.log(percentage, exercise.count, exercise.sets);
     exerciseContainer.style.background = `linear-gradient(to right, ${color},0.5) ${percentage}%, white ${percentage}%)`;
     exerciseSets.innerText = `${exercise.count}/${exercise.sets}`;
     if (
       checkCountArray.every(elem => {
         // console.log(elem.count === elem.sets);
-        return elem.count === elem.sets;
+        return elem.count == elem.sets;
       })
     ) {
       if (congratulationsMessageCount !== 1) renderCongratulations();
@@ -300,7 +300,7 @@ function createExerciseComponent(exercise) {
   const exerciseContentRight = document.createElement("div");
   exerciseContentRight.classList.add("exercise-content-right");
   exerciseContentRight.addEventListener("click", function(event) {
-    console.dir(event.target.classList[0]);
+    // console.dir(event.target.classList[0]);
     if (event.target.classList[0] === "exercise-edit-button") {
       return;
     }
@@ -314,10 +314,11 @@ function createExerciseComponent(exercise) {
     exerciseContainer.style.background = `linear-gradient(to right, ${color},0.5) ${percentage}%, white ${percentage}%)`;
     exerciseSets.innerText = `${exercise.count}/${exercise.sets}`;
     // console.log(renderArray);
+    console.dir(checkCountArray);
     if (
       checkCountArray.every(elem => {
         // console.log(elem.count === elem.sets);
-        return elem.count === elem.sets;
+        return elem.count == elem.sets;
       })
     ) {
       if (congratulationsMessageCount !== 1) renderCongratulations();
@@ -383,16 +384,16 @@ function editExercise(exercise) {
 }
 
 function deleteExercise(exercise) {
-  console.dir(exerciseArray);
+  // console.dir(exerciseArray);
   exerciseArray.forEach((elem, index) => {
     if (exercise === elem) exerciseArray.splice(index, 1);
   });
-  console.dir(exerciseArray);
+  // console.dir(exerciseArray);
   clearRoutine();
   renderRoutine(exercise.day);
 }
 
-let previousDay = "";
+// let previousDay = "";
 
 routinesContainer.addEventListener("click", function(event) {
   if (event.target.id.includes("day")) {
@@ -404,7 +405,7 @@ routinesContainer.addEventListener("click", function(event) {
     routinesList.forEach(elem => {
       // console.log("style routine with active class");
       if (elem === routine) {
-        elem.classList.toggle("active");
+        elem.classList.add("active");
       } else {
         elem.classList.remove("active");
       }
@@ -412,21 +413,12 @@ routinesContainer.addEventListener("click", function(event) {
     // console.log("right before clear routine");
     clearRoutine();
     //render day-related exercises
-    // console.log("right before render routine");
-    console.log("reaches here point 1");
-    console.log(previousDay);
-    if (previousDay !== dayOfWeek) {
-      console.log("reaches here");
-      renderRoutine(dayOfWeek);
-      previousDay = dayOfWeek;
-    } else {
-      previousDay = "";
-    }
+    renderRoutine(dayOfWeek);
   }
 });
 
 function renderRoutineBorderLeft(day) {
-  routineContainer.classList.toggle(day);
+  routineContainer.classList.add(day);
   [...routineContainer.classList].forEach(elem => {
     if (elem !== day) {
       routineContainer.classList.remove(elem);
@@ -446,7 +438,7 @@ function renderRoutineOption(day) {
   routinesList.forEach(elem => {
     // console.log("style routine with active class");
     if (elem.id === day) {
-      elem.classList.toggle("active");
+      elem.classList.add("active");
     } else {
       elem.classList.remove("active");
     }
@@ -489,7 +481,7 @@ function clearRoutine() {
 let checkCountArray = [];
 
 function renderRoutine(day) {
-  console.log("render routine");
+  // console.log("render routine");
   const renderArray = [];
   exerciseArray.forEach(exercise => {
     if (exercise.day === day) {
@@ -539,7 +531,7 @@ buttonList.addEventListener("click", function(event) {
   } else {
     newDay = event.target.id;
   }
-  console.log(newDay);
+  // console.log(newDay);
   event.target.classList.toggle("active");
   buttonObjList.forEach(elem => {
     if (elem.id !== newDay) elem.classList.remove("active");
@@ -547,7 +539,7 @@ buttonList.addEventListener("click", function(event) {
 });
 
 newExerciseSaveEditBtn.addEventListener("click", function() {
-  console.dir(currentEditExercise);
+  // console.dir(currentEditExercise);
   const errorMsg = document.getElementById("new-exercise-errormsg");
   const name = document
     .getElementById("new-exercise-nameInput")
@@ -589,6 +581,7 @@ newExerciseSaveEditBtn.addEventListener("click", function() {
     footerShadow.classList.remove("active");
   }
 });
+
 newExerciseSaveBtn.addEventListener("click", function() {
   const errorMsg = document.getElementById("new-exercise-errormsg");
   const name = document
@@ -618,9 +611,9 @@ newExerciseSaveBtn.addEventListener("click", function() {
       "You must specify the target parts of your new exercise!";
   else {
     const newExercise = new Exercise(day, name, time, reps, sets, target);
-    console.log(reps, sets);
     exerciseArray.push(newExercise);
     clearRoutine();
+    // previousDay = "";
     renderRoutine(day);
     resetForm();
     renderRoutineOption(day);
