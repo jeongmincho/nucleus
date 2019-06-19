@@ -574,6 +574,7 @@ newExerciseSaveEditBtn.addEventListener("click", function() {
     currentEditExercise.sets = sets;
     currentEditExercise.parts = target;
     currentEditExercise.day = day;
+    currentEditExercise.count = 0;
     clearRoutine();
     renderRoutine(day);
     resetForm();
