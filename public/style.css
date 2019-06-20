@@ -20,6 +20,7 @@ body {
 
 #navbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
@@ -46,6 +47,10 @@ body {
   height: 4rem;
   width: auto;
   float: right;
+}
+
+#burger {
+  display: none;
 }
 
 #content {
@@ -259,7 +264,11 @@ input[type="submit" i] {
   background-color: #A363D9
 }
 
-#monday.active>.routine-option-tag {
+.active>.routine-option-tag {
+  width: 0.7rem;
+}
+
+/* #monday.active>.routine-option-tag {
   background-color: #40A4D8;
   width: 0.7rem
 }
@@ -292,7 +301,7 @@ input[type="submit" i] {
 #sunday.active>.routine-option-tag {
   background-color: #A363D9;
   width: 0.7rem
-}
+} */
 
 /* ============ ROUTINE CONTAINER ============ */
 
@@ -578,7 +587,7 @@ input[type="submit" i] {
   width: 75%;
   border-radius: 10px;
   z-index: 2;
-  transform: translateY(30em);
+  transform: translateY(50em);
   transition: all .5s;
 }
 
@@ -745,15 +754,17 @@ input[type="submit" i] {
   display: flex;
   justify-content: center;
   width: 100%;
+  height: 0;
   bottom: 0;
   position: fixed;
-  padding: 1rem;
 }
 
 #addExerciseButton {
   -webkit-box-shadow: 5px 5px 57px -44px rgba(0, 0, 0, 0.63);
   -moz-box-shadow: 5px 5px 57px -44px rgba(0, 0, 0, 0.63);
   box-shadow: 5px 5px 57px -44px rgba(0, 0, 0, 0.63);
+  padding-bottom: 1rem;
+  transform: translateY(-8em);
 }
 
 #addExerciseButtonImage {
@@ -808,4 +819,155 @@ input[type="submit" i] {
 #giphy {
   border-radius: 10px;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 1000px) {
+  #content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  #routines-container {
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    height: 4rem;
+    bottom: 0;
+    order: 1;
+    flex-direction: row;
+    width: 100%;
+    background-color: white;
+  }
+  #routine-container {
+    width: auto;
+  }
+  #routine-container.other {
+    width: auto;
+  }
+  #routines-header {
+    display: none;
+  }
+  .routine-option-checkbox {
+    display: none;
+  }
+  .routine-option {
+    flex-direction: column;
+    padding: 0 0 1rem 0;
+  }
+  .routine-option-tag {
+    order: -1;
+    width: 5rem;
+    height: .5rem;
+    margin: 0;
+  }
+  .active>.routine-option-tag {
+    width: 5rem;
+    height: 1rem;
+  }
+  #addExerciseButton {
+    padding-bottom: 1rem;
+    transform: translateY(-9rem);
+  }
+  #new-exercise-container {
+    width: 85%;
+  }
+}
+
+@media (max-width: 875px) {
+  #navbar {
+    justify-content: center;
+  }
+  #new-exercise-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  #new-exercise-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
+    padding: 10px;
+  }
+  #new-exercise-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #routine-container {
+    width: auto;
+  }
+  #routine-container.other {
+    width: auto;
+  }
+}
+
+@media (max-width: 650px) {
+  #navbar {
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  #routine-container {
+    width: auto;
+  }
+  #routine-container.other {
+    width: auto;
+  }
+  #logoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%
+  }
+  #navbar-options {
+    /* transform: translateY(-20rem); */
+    opacity: 0;
+    height: 0;
+    flex-direction: column;
+    align-items: center;
+    transition: opacity .5s, height 1s;
+  }
+  #navbar-options.active {
+    opacity: 1;
+    height: 15rem;
+  }
+  .navbar-option {
+    padding: 0;
+  }
+  #burger {
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    opacity: 1;
+  }
+  .routine-option-tag {
+    order: -1;
+    width: 3rem;
+    height: .5rem;
+    margin: 0;
+  }
+  .active>.routine-option-tag {
+    width: 3rem;
+    height: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  #new-exercise-container {
+    height: 85%;
+    bottom: 2rem;
+  }
+  #routine-container {
+    width: auto;
+  }
+  #routine-container.other {
+    width: auto;
+  }
+  #new-exercise-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* align-items: center */
+  }
 }

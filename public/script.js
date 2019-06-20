@@ -652,3 +652,41 @@ const newSpan = document.getElementsByClassName("newClose")[0];
 newSpan.onclick = function() {
   modal.style.display = "none";
 };
+
+// media query hamburger
+const navBarOptions = document.getElementById("navbar-options");
+
+const burger = document.getElementById("burger");
+burger.addEventListener("click", function() {
+  navBarOptions.classList.toggle("active");
+});
+
+var x = window.matchMedia("(max-width: 650px)");
+function changeRoutineText(x) {
+  if (x.matches) {
+    document.querySelector("#monday > .routine-option-text").innerText = "M";
+    document.querySelector("#tuesday > .routine-option-text").innerText = "T";
+    document.querySelector("#wednesday > .routine-option-text").innerText = "W";
+    document.querySelector("#thursday > .routine-option-text").innerText = "Th";
+    document.querySelector("#friday > .routine-option-text").innerText = "F";
+    document.querySelector("#saturday > .routine-option-text").innerText = "Sa";
+    document.querySelector("#sunday > .routine-option-text").innerText = "Su";
+  } else {
+    document.querySelector("#monday > .routine-option-text").innerText =
+      "MONDAY";
+    document.querySelector("#tuesday > .routine-option-text").innerText =
+      "TUESDAY";
+    document.querySelector("#wednesday > .routine-option-text").innerText =
+      "WEDNESDAY";
+    document.querySelector("#thursday > .routine-option-text").innerText =
+      "THURSDAY";
+    document.querySelector("#friday > .routine-option-text").innerText =
+      "FRIDAY";
+    document.querySelector("#saturday > .routine-option-text").innerText =
+      "SATURDAY";
+    document.querySelector("#sunday > .routine-option-text").innerText =
+      "SUNDAY";
+  }
+}
+changeRoutineText(x);
+x.addListener(changeRoutineText);
